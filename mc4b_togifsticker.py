@@ -3,9 +3,7 @@
 from .. import loader, utils
 import logging
 from telethon import events
-from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon import functions
-import asyncio
 import os
 import ffmpeg
 from .. import loader, utils
