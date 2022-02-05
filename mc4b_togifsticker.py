@@ -1,5 +1,5 @@
 # @Minecraft4babies's module
-#
+# В принципе делался для себя. Код ниже берите, если нужен)
 from .. import loader, utils
 import logging
 from telethon import events
