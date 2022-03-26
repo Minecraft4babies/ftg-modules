@@ -44,13 +44,11 @@ class YtDlMod(loader.Module):
 
 
 async def riper(self, m, type):
-	reply = reply.message
-	reply = reply.replace("youtube.com/shorts", "youtu.be")
-	reply = reply.replace("?feature=share", "")
+	reply = await m.get_reply_message()
 	args = utils.get_args_raw(m)
-	args = args.replace("youtube.com/shorts","youtu.be")
-	args = args.replace("?feature=share", "")
 	url = args or reply.raw_text
+	url = url.replace("youtube.com/shorts", "youtu.be")
+	url = url.replace("?feature=share", "")
 	if not url:
 		return await utils.answer(m, self.strings("noargs", m))
 	m = await utils.answer(m, self.strings("preparing", m))
