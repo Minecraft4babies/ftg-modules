@@ -44,7 +44,7 @@ class YtDlMod(loader.Module):
 
 
 async def riper(self, m, type):
-	reply = await m.get_reply_message()
+	reply = reply.message
 	reply = reply.replace("youtube.com/shorts", "youtu.be")
 	reply = reply.replace("?feature=share", "")
 	args = utils.get_args_raw(m)
