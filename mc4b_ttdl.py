@@ -53,7 +53,8 @@ class mc4b_ttdlMod(loader.Module):
                     except YouBlockedUserError:
                         await message.reply(self.strings("BlockedBotError", message))
                         return
-                    await message.delete()
+                    if message.out:
+                        await message.delete()
                     await message.client.send_file(message.chat_id, response.media)
             else:
                 await message.edit(self.strings("Working", message))
@@ -65,7 +66,8 @@ class mc4b_ttdlMod(loader.Module):
                     except YouBlockedUserError:
                         await message.reply(self.strings("BlockedBotError", message))
                         return
-                    await message.delete()
+                    if message.out:
+                        await message.delete()
                     await message.client.send_file(message.chat_id, response.media, reply_to=reply)
         except TimeoutError:
             return await message.edit(self.strings("TimeoutError", message))
