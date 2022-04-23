@@ -42,7 +42,7 @@ class Mc4bToGifStickerMod(loader.Module):
     async def gifstickercmd(self, message):
         """<code>.gifsticker</code> <реплай на видео>"""
 
-        a = """ffmpeg -ss 00:00:00 -i inputfile.mp4 -to 00:00:03 -filter:v "scale=w=512:h=512:force_original_aspect_ratio=decrease,fps=30" -c:v libvpx-vp9 -crf 30 -b:v 600k -an GifSticker.WEBM"""
+        a = """ffmpeg -ss 00:00:00 -i inputfile.mp4 -to 00:00:03 -filter:v "scale=w=512:h=512:force_original_aspect_ratio=decrease,fps=30" -c:v libvpx-vp9 -crf 30 -b:v 900k -an GifSticker.WEBM"""
         try:
             await message.edit(self.strings("Downloading", message))
             reply = await message.get_reply_message()
