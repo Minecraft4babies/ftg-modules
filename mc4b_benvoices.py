@@ -1,4 +1,4 @@
-#---@Minecarft4babies`s module :^)---
+#---@Minecraft4babies`s module :^)---
 import random
 from .. import loader, utils
 
