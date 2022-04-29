@@ -1,4 +1,10 @@
-#---@Minecraft4babies`s module :^)---
+#    ____  __  __ _                            __ _   _  _   _           _     _           
+#   / __ \|  \/  (_)_ __   ___  ___ _ __ __ _ / _| |_| || | | |__   __ _| |__ (_) ___  ___ 
+#  / / _` | |\/| | | '_ \ / _ \/ __| '__/ _` | |_| __| || |_| '_ \ / _` | '_ \| |/ _ \/ __|
+# | | (_| | |  | | | | | |  __/ (__| | | (_| |  _| |_|__   _| |_) | (_| | |_) | |  __/\__ \
+#  \ \__,_|_|  |_|_|_| |_|\___|\___|_|  \__,_|_|  \__|  |_| |_.__/ \__,_|_.__/|_|\___||___/
+#   \____/                                                                                 
+
 import random
 from .. import loader, utils
 
@@ -35,7 +41,10 @@ class ben_voices_mc4b1Mod(loader.Module):
 
     @loader.unrestricted
     async def askbencmd(self, message):
-        """Задай вопрос Бену. Он точно поможет). Можно просто реплайем без вопроса"""
+        """Задай вопрос Бену. Он точно поможет). Также можно просто реплайем и без вопроса
+        
+        
+        👨‍💻Made by: @Minecraft4babies_GFTG_Modules"""
         reply = await message.get_reply_message()
         question = self.strings['question'].format(utils.get_args_raw(message))
         voice = (random.choice(await message.client.get_messages('@mc4b_files_for_modules', limit=None,
