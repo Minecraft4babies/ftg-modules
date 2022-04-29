@@ -1,5 +1,9 @@
-# @Minecraft4babies's module
-# В принципе делался для себя. Код ниже берите, если нужен)
+#    ____  __  __ _                            __ _   _  _   _           _     _           
+#   / __ \|  \/  (_)_ __   ___  ___ _ __ __ _ / _| |_| || | | |__   __ _| |__ (_) ___  ___ 
+#  / / _` | |\/| | | '_ \ / _ \/ __| '__/ _` | |_| __| || |_| '_ \ / _` | '_ \| |/ _ \/ __|
+# | | (_| | |  | | | | | |  __/ (__| | | (_| |  _| |_|__   _| |_) | (_| | |_) | |  __/\__ \
+#  \ \__,_|_|  |_|_|_| |_|\___|\___|_|  \__,_|_|  \__|  |_| |_.__/ \__,_|_.__/|_|\___||___/
+#   \____/                                                                                 
 from .. import loader, utils
 import logging
 from telethon import events
@@ -40,7 +44,10 @@ class Mc4bToGifStickerMod(loader.Module):
 
     @loader.unrestricted
     async def gifstickercmd(self, message):
-        """<code>.gifsticker</code> <реплай на видео>"""
+        """<code>.gifsticker</code> <реплай на видео>
+        
+        
+        👨‍💻Made by: @Minecraft4babies_GFTG_Modules"""
 
         a = """ffmpeg -ss 00:00:00 -i inputfile.mp4 -to 00:00:03 -filter:v "scale=w=512:h=512:force_original_aspect_ratio=decrease,fps=30" -c:v libvpx-vp9 -crf 30 -b:v 900k -an GifSticker.WEBM"""
         try:
