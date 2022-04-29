@@ -19,7 +19,7 @@ def register(cb):
 
 @loader.tds
 class Mc4bToGifStickerMod(loader.Module):
-    """"<b>Модуль для преобразования видео в GIF-стикеры</b>"""
+    """"Модуль для преобразования видео в GIF-стикеры"""
     strings = {"cfg_doc": "Настройка надписей состояния работы",
                "name": "Майнкрафтер. GIF-стикеров мейкер",
                "Downloading": "<b>Котики(🐈‍⬛ и 🐈) скачивают твою штучку...🐾</b>",
@@ -44,7 +44,7 @@ class Mc4bToGifStickerMod(loader.Module):
 
     @loader.unrestricted
     async def gifstickercmd(self, message):
-        """<code>.gifsticker</code> <реплай на видео>
+        """ <реплай на видео>
         
         
         👨‍💻Made by: @Minecraft4babies_GFTG_Modules"""
