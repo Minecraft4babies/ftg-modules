@@ -16,7 +16,7 @@ def register(cb):
 class ben_voices_mc4b1Mod(loader.Module):
     """Be-en!"""
 
-    strings = {'name'           : '''BenVoice''',
+    strings = {'name'           : '''BenVoices''',
                'wrong_input'    : '<b>Такого Бен не говорил...</b>',
                'question'       : '🤔<b>Бен, {}?</b>🤔',
                'reply_answer'   : '<b>Бен говорит:</b>'}
