@@ -60,8 +60,7 @@ class minusrus_mc4b1Mod(loader.Module):
 
     @loader.unrestricted
     async def deadruscmd(self, message):
-        """.deadrus <"snore" или ничего> чтобы получить случайных мёртвых солдатиков))
-        """
+        """.deadrus <"snore" или ничего> чтобы получить случайных мёртвых солдатиков))\n"""
 
         await message.edit(self.strings['loading_deadrus'])
         reply = await message.get_reply_message()
