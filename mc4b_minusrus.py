@@ -35,7 +35,10 @@ class minusrus_mc4b1Mod(loader.Module):
 
     @loader.unrestricted
     async def minusruscmd(self, message):
-        """<code>.minusrus</code> <b>чтобы узнать  потери РФ по оценке ВСУ</b>"""
+        """Чтобы узнать  потери РФ по оценке ВСУ.
+        
+        
+        👨‍💻Made by: @Minecraft4babies_GFTG_Modules"""
 
         await message.edit(self.strings['loading_minusrus'])
         reply = await message.get_reply_message()
@@ -57,10 +60,7 @@ class minusrus_mc4b1Mod(loader.Module):
 
     @loader.unrestricted
     async def deadruscmd(self, message):
-        """.deadrus <"snore" или ничего> чтобы получить случайных мёртвых солдатиков))
-        
-        
-        👨‍💻Made by: @Minecraft4babies_GFTG_Modules"""
+        """.deadrus <"snore" или ничего> чтобы получить случайных мёртвых солдатиков))"""
 
         await message.edit(self.strings['loading_deadrus'])
         reply = await message.get_reply_message()
