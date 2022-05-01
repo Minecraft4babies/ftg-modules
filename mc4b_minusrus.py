@@ -60,7 +60,7 @@ class minusrus_mc4b1Mod(loader.Module):
 
     @loader.unrestricted
     async def deadruscmd(self, message):
-        """.deadrus <"snore" или ничего> чтобы получить случайных мёртвых солдатиков))"""
+        """.deadrus <"snore", "eblo" или ничего> чтобы получить случайных мёртвых солдатиков))"""
 
         await message.edit(self.strings['loading_deadrus'])
         reply = await message.get_reply_message()
@@ -87,4 +87,7 @@ class minusrus_mc4b1Mod(loader.Module):
                 None
         if utils.get_args_raw(message) == 'snore':
             voice = (await message.client.get_messages(1650356301, search='MinusRus: snore'))[0]
+            await message.client.send_file(message.chat_id, voice.media, reply_to=(await message.client.get_messages(message.chat_id, limit=1, reverse=False))[0])
+        elif utils.get_args_raw(message) == 'eblo':
+            voice = (await message.client.get_messages(1650356301, search='MinusRus: eblo'))[0]
             await message.client.send_file(message.chat_id, voice.media, reply_to=(await message.client.get_messages(message.chat_id, limit=1, reverse=False))[0])
