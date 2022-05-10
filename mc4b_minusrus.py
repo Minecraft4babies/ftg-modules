@@ -62,14 +62,15 @@ class minusrus_mc4b1Mod(loader.Module):
     async def deadruscmd(self, message):
         """.deadrus <"snore", "eblo" или ничего> чтобы получить случайных мёртвых солдатиков))"""
 
+        channel_with_corpses = '@russian_corpses_are_in_ukraine'
         await message.edit(self.strings['loading_deadrus'])
         reply = await message.get_reply_message()
 
-        amount_of_dead_rus = (await message.client.get_messages(1639032205, limit=0)).total
-        last_dead_rus = (await message.client.get_messages(1639032205, limit=1, reverse=False))[0].id
+        amount_of_dead_rus = (await message.client.get_messages(channel_with_corpses, limit=0)).total
+        last_dead_rus = (await message.client.get_messages(channel_with_corpses, limit=1, reverse=False))[0].id
         while True:
             deadrusid = random.randint(1, last_dead_rus)
-            randomdeadrus = await message.client.get_messages(1639032205, ids=deadrusid)
+            randomdeadrus = await message.client.get_messages(channel_with_corpses, ids=deadrusid)
             try:
                 if message.out:
                     await message.delete()
@@ -86,8 +87,8 @@ class minusrus_mc4b1Mod(loader.Module):
             except:
                 None
         if utils.get_args_raw(message) == 'snore':
-            voice = (await message.client.get_messages(1650356301, search='MinusRus: snore'))[0]
+            voice = (await message.client.get_messages('@mc4b_files_for_modules', search='MinusRus: snore'))[0]
             await message.client.send_file(message.chat_id, voice.media, reply_to=(await message.client.get_messages(message.chat_id, limit=1, reverse=False))[0])
         elif utils.get_args_raw(message) == 'eblo':
-            voice = (await message.client.get_messages(1650356301, search='MinusRus: eblo'))[0]
+            voice = (await message.client.get_messages('@mc4b_files_for_modules', search='MinusRus: eblo'))[0]
             await message.client.send_file(message.chat_id, voice.media, reply_to=(await message.client.get_messages(message.chat_id, limit=1, reverse=False))[0])
