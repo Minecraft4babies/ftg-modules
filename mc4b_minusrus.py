@@ -10,6 +10,8 @@ import io
 import datetime
 import requests
 import random
+from telethon.sync import TelegramClient
+from telethon import functions
 from .. import loader, utils
 
 def date():
@@ -32,31 +34,6 @@ class minusrus_mc4b1Mod(loader.Module):
 
     def __init__(self):
         self.name = self.strings['name']
-
-    @loader.unrestricted
-    async def minusruscmd(self, message):
-        """Чтобы узнать  потери РФ по оценке ВСУ.
-        
-        
-        👨‍💻Made by: @Minecraft4babies_GFTG_Modules"""
-
-        await message.edit(self.strings['loading_minusrus'])
-        reply = await message.get_reply_message()
-
-        minusruslink = "https://minusrus.com/ru"
-        url = "https://webshot.deam.io/{}?delay=3000?height=1650&width=1800".format(minusruslink)
-        file = requests.get(url)
-        file = io.BytesIO(file.content)
-        file.name = "minusrus.png"
-        file.seek(0)
-
-        if message.out:
-            await message.delete()
-            await message.client.send_file(message.chat_id, file=file,
-                                           caption=self.strings['caption_minusrus'].format(date()), reply_to=reply)
-        else:
-            await message.client.send_file(message.chat_id, file=file,
-                                           caption=self.strings['caption_minusrus'].format(date()), reply_to=message)
 
     @loader.unrestricted
     async def deadruscmd(self, message):
@@ -92,3 +69,25 @@ class minusrus_mc4b1Mod(loader.Module):
         elif utils.get_args_raw(message) == 'eblo':
             voice = (await message.client.get_messages('@mc4b_files_for_modules', search='MinusRus: eblo'))[0]
             await message.client.send_file(message.chat_id, voice.media, reply_to=(await message.client.get_messages(message.chat_id, limit=1, reverse=False))[0])
+
+
+    @loader.unrestricted
+    async def minusruscmd(self, message):
+        """Чтобы узнать  потери РФ по оценке ВСУ.
+        
+        
+        👨‍💻Made by: @Minecraft4babies_GFTG_Modules"""
+
+        await message.edit(self.strings['loading_minusrus'])
+        reply = await message.get_reply_message()
+
+        preview = await message.client(functions.messages.GetWebPagePreviewRequest('https://minusrus.com/ru'))
+
+        if message.out:
+            await message.delete()
+            await message.client.send_file(message.chat_id, file=preview.webpage.photo,
+                                           caption=self.strings['caption_minusrus'].format(date()), reply_to=reply)
+        else:
+            await message.client.send_file(message.chat_id, file=preview.webpage.photo,
+                                           caption=self.strings['caption_minusrus'].format(date()), reply_to=message)
+
