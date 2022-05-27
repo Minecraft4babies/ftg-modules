@@ -81,13 +81,13 @@ class minusrus_mc4b1Mod(loader.Module):
         await message.edit(self.strings['loading_minusrus'])
         reply = await message.get_reply_message()
 
-        preview = await message.client(functions.messages.GetWebPagePreviewRequest('https://minusrus.com/ru'))
+        minusrus = (await message.client.get_messages('@poteri_rf_in_ukraine', limit=1, reverse=False))[0]
 
         if message.out:
             await message.delete()
-            await message.client.send_file(message.chat_id, file=preview.webpage.photo,
+            await message.client.send_file(message.chat_id, file=minusrus.media,
                                            caption=self.strings['caption_minusrus'].format(date()), reply_to=reply)
         else:
-            await message.client.send_file(message.chat_id, file=preview.webpage.photo,
+            await message.client.send_file(message.chat_id, file=minusrus.media,
                                            caption=self.strings['caption_minusrus'].format(date()), reply_to=message)
 
