@@ -29,9 +29,6 @@ class mc4b_ttdlMod(loader.Module):
         self._client = client
         self.me = await client.get_me()
 
-    def __init__(self):
-        self.config = loader.ModuleConfig("CONFIG_STRING", "hello", lambda m: self.strings("cfg_doc", m))
-
     @loader.unrestricted
     async def мурcmd(self, message):
         """<code>.мур</code> <b><ссылка/реплай></b>"""
