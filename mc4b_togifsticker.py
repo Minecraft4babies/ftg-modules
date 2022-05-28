@@ -41,9 +41,6 @@ class Mc4bToGifStickerMod(loader.Module):
         self._client = client
         self.me = await client.get_me()
 
-    def __init__(self):
-        self.config = loader.ModuleConfig("CONFIG_STRING", "hello", lambda m: self.strings("cfg_doc", m))
-
     @loader.unrestricted
     async def gifstickercmd(self, message):
         """ <реплай на видео>
