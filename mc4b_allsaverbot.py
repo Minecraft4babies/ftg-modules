@@ -24,7 +24,7 @@ class AllsaverbotMod(loader.Module):
                "Working": "<b>Котики(🐈‍⬛ и 🐈) сохраняют твою штучку...🐾</b>",
                "Working_checker": "<b>Ой, котик увидел от тебя ссылку!!!🐾</b>",
                "BlockedBotError": "<b>🐈: «Няф, разблокируй, пожалуйста, @allsaverbot!»</b>",
-               "TimeoutError": "<b>🐈‍⬛: «@allsaverbot что-то вредничает...🐾»</b>"}
+               "TimeoutError": "<b>🐈‍⬛: «Бот @allsaverbot что-то вредничает...🐾»</b>"}
 
     def __init__(self):
         self.name = self.strings['name']
@@ -112,7 +112,7 @@ class AllsaverbotMod(loader.Module):
                     bot_chat = "@allsaverbot"
                     async with message.client.conversation(bot_chat) as conv:
                         try:
-                            await message.client.send_message(bot_chat, text)
+                            await message.client.send_message(bot_chat, message=text.split('=')[0])
                             response = await conv.wait_event(events.NewMessage(incoming=True, from_users=804576054))
                         except YouBlockedUserError:
                             await answer.edit(self.strings('BlockedBotError'))
