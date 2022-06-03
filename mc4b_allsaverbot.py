@@ -17,10 +17,7 @@ def register(cb):
 
 @loader.tds
 class AllsaverbotMod(loader.Module):
-    """Скачиваю видео TikTok, Pinterest, Instagram через @allsaverbot
-
-
-        👨‍💻Made by: @Minecraft4babies_GFTG_Modules"""
+    """Скачиваю видео TikTok, Pinterest, Instagram через @allsaverbot"""
     strings = {"cfg_doc": "Настройка надписей состояния работы",
                "name": "Allsaverbot",
                "NoArgs": "<b>🐈‍⬛: «Миу? Что ты хочешь сделать? Я жду ссылку..»</b>",
@@ -47,7 +44,10 @@ class AllsaverbotMod(loader.Module):
 
     @loader.unrestricted
     async def мурcmd(self, message):
-        """ссылка / <реплай>"""
+        """ссылка / <реплай>
+
+
+        👨‍💻Made by: @Minecraft4babies_GFTG_Modules""""
 
         try:
             text = utils.get_args_raw(message)
@@ -106,7 +106,7 @@ class AllsaverbotMod(loader.Module):
         chat = str(utils.get_chat_id(message))
         text = message.raw_text
         if chat in str(self.config['CheckedChats']) and not ' ' in text:
-            if 'https://vm.tiktok.com/' in text or 'https://www.instagram.com/' in text:
+            if 'tiktok.com/' in text or 'instagram.com/' in text or 'pin.it/' in text:
                 try:
                     answer = await message.client.send_message(message.chat_id, message=self.strings('Working_checker'), reply_to=message)
                     bot_chat = "@allsaverbot"
