@@ -47,7 +47,7 @@ class AllsaverbotMod(loader.Module):
         """ссылка / <реплай>
 
 
-        👨‍💻Made by: @Minecraft4babies_GFTG_Modules""""
+        👨‍💻Made by: @Minecraft4babies_GFTG_Modules"""
 
         try:
             text = utils.get_args_raw(message)
