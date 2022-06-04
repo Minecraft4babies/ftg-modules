@@ -156,7 +156,7 @@ class SpotifyMod(loader.Module):
                                                    redirect_uri='https://fuccsoc.com/', scope=self.scope)
         self.name = self.strings['name']
         self.config = loader.ModuleConfig(
-            "AutoBioTemplate", "Сейчас я слушаю в Spotify:🎧 {} – {}", lambda: "Template for Spotify AutoBio")
+            "AutoBioTemplate", "Сейчас я слушаю в Spotify: 🎶{}🎶", lambda: "Template for Spotify AutoBio")
         self.bio_task = None
 
     async def autobio(self) -> None:
@@ -178,12 +178,12 @@ class SpotifyMod(loader.Module):
                     artist['name']
                     for artist in current_playback['item']['artists']
                 ]
-                bio = "Сейчас слушаю в Spotify "
-                bio += (
-                    f"🎶{' '.join(artists)} — {track}🎶" if artists else f"{track}") if track else ""
-                bio = bio.replace('Kukryniksy', 'Кукрыниксы')
-                bio = bio.replace('Korol i Shut', 'Король и Шут')
-                bio = bio.replace('KnyaZz', 'КняZz')
+                current_song = (
+                    f"{' '.join(artists)} — {track}" if artists else f"{track}") if track else ""
+                current_song = current_song.replace('Kukryniksy', 'Кукрыниксы')
+                current_song = current_song.replace('Korol i Shut', 'Король и Шут')
+                current_song = current_song.replace('KnyaZz', 'КняZz')
+                bio = self.config['AutoBioTemplate'].format(current_song)
             except Exception:
                 bio = self.strings("no_music_bio")
 
