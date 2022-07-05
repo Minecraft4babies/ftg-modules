@@ -189,9 +189,14 @@ class SpotifyMod(loader.Module):
                 bio = self.strings("no_music_bio")
 
             try:
-                await self.client(telethon.tl.functions.account.UpdateProfileRequest(
-                    about=bio[:70]
-                ))
+                try:
+                    await self.client(telethon.tl.functions.account.UpdateProfileRequest(
+                        about=bio[:141]
+                    ))
+                except telethon.errors.rpcerrorlist.AboutTooLongError:
+                    await self.client(telethon.tl.functions.account.UpdateProfileRequest(
+                        about=bio[:70]
+                    ))
             except telethon.errors.rpcerrorlist.FloodWaitError as e:
                 logger.info(f'Ожидание {max(e.seconds, 60)} из-за floodwait')
                 await asyncio.sleep(max(e.seconds, 60))
