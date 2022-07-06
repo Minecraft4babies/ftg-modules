@@ -104,7 +104,7 @@ class AllsaverbotMod(loader.Module):
 
     async def watcher(self, message):
         chat = str(utils.get_chat_id(message))
-        text = message.raw_text
+        text = message.message
         if chat in str(self.config['CheckedChats']) and not ' ' in text:
             if 'tiktok.com/' in text or 'instagram.com/' in text or 'pin.it/' in text:
                 try:
