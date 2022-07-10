@@ -52,14 +52,14 @@ class PosterMod(loader.Module):
                                 if reply.grouped_id == checked_message.grouped_id:
                                     messages_to_post.insert(0, checked_message)
                             except AttributeError:
-                                break
+                                None
                         for i in range(1,10):
                             checked_message = await message.client.get_messages(message.chat_id, ids=reply.id + i)
                             try:
                                 if reply.grouped_id == checked_message.grouped_id:
                                     messages_to_post.append(checked_message)
                             except AttributeError:
-                                break
+                                None
                     else:
                         messages_to_post.append(reply)
 
