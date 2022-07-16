@@ -184,6 +184,7 @@ class SpotifyMod(loader.Module):
                 current_song = current_song.replace('Korol i Shut', 'Король и Шут')
                 current_song = current_song.replace('KnyaZz', 'КняZz')
                 current_song = current_song.replace('Severny Flot', 'Северный Флот')
+                current_song = current_song.replace('Aria', 'Ария')
                 bio = self.config['AutoBioTemplate'].format(current_song)
             except Exception:
                 bio = self.strings("no_music_bio")
