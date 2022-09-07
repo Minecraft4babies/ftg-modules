@@ -1,10 +1,10 @@
 """
-    ____  __  __ _                            __ _   _  _   _           _     _           
-   / __ \|  \/  (_)_ __   ___  ___ _ __ __ _ / _| |_| || | | |__   __ _| |__ (_) ___  ___ 
+    ____  __  __ _                            __ _   _  _   _           _     _
+   / __ \|  \/  (_)_ __   ___  ___ _ __ __ _ / _| |_| || | | |__   __ _| |__ (_) ___  ___
   / / _` | |\/| | | '_ \ / _ \/ __| '__/ _` | |_| __| || |_| '_ \ / _` | '_ \| |/ _ \/ __|
  | | (_| | |  | | | | | |  __/ (__| | | (_| |  _| |_|__   _| |_) | (_| | |_) | |  __/\__ \
   \ \__,_|_|  |_|_|_| |_|\___|\___|_|  \__,_|_|  \__|  |_| |_.__/ \__,_|_.__/|_|\___||___/
-   \____/                                                                                 
+   \____/
 """
 import io
 import datetime
@@ -74,20 +74,19 @@ class minusrus_mc4b1Mod(loader.Module):
     @loader.unrestricted
     async def minusruscmd(self, message):
         """Чтобы узнать  потери РФ по оценке ВСУ.
-        
-        
+
+
         👨‍💻Made by: @Minecraft4babies_GFTG_Modules"""
 
         await message.edit(self.strings['loading_minusrus'])
         reply = await message.get_reply_message()
 
-        minusrus = (await message.client.get_messages('@poteri_rf_in_ukraine', limit=1, reverse=False))[0]
+        preview = await message.client(functions.messages.GetWebPagePreviewRequest('https://minusrus.com/ru'))
 
         if message.out:
             await message.delete()
-            await message.client.send_file(message.chat_id, file=minusrus.media,
+            await message.client.send_file(message.chat_id, file=preview.webpage.photo,
                                            caption=self.strings['caption_minusrus'].format(date()), reply_to=reply)
         else:
-            await message.client.send_file(message.chat_id, file=minusrus.media,
+            await message.client.send_file(message.chat_id, file=preview.webpage.photo,
                                            caption=self.strings['caption_minusrus'].format(date()), reply_to=message)
-
