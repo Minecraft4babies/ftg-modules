@@ -6,25 +6,23 @@
   \ \__,_|_|  |_|_|_| |_|\___|\___|_|  \__,_|_|  \__|  |_| |_.__/ \__,_|_.__/|_|\___||___/
    \____/
 """
-import logging
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-import asyncio
 from .. import loader, utils
 
 def register(cb):
-    cb(AllsaverbotMod())
+    cb(TiktokDownloadRobotMod())
 
 @loader.tds
-class AllsaverbotMod(loader.Module):
-    """Скачиваю видео TikTok, Pinterest, Instagram через @allsaverbot"""
+class TiktokDownloadRobotMod(loader.Module):
+    """Скачиваю видео TikTok через @TIKTOKDOWNLOADROBOT"""
     strings = {"cfg_doc": "Настройка надписей состояния работы",
-               "name": "Allsaverbot",
+               "name": "TiktokDownloadRobot",
                "NoArgs": "<b>🐈‍⬛: «Миу? Что ты хочешь сделать? Я жду ссылку..»</b>",
                "Working": "<b>Котики(🐈‍⬛ и 🐈) сохраняют твою штучку...🐾</b>",
                "Working_checker": "<b>Ой, котик увидел от тебя ссылку!!!🐾</b>",
                "BlockedBotError": "<b>🐈: «Няф, разблокируй, пожалуйста, @allsaverbot!»</b>",
-               "TimeoutError": "<b>🐈‍⬛: «Бот @allsaverbot что-то вредничает...🐾»</b>"}
+               "TimeoutError": "<b>🐈‍⬛: «Бот @TIKTOKDOWNLOADROBOT что-то вредничает...🐾»</b>"}
 
     def __init__(self):
         self.name = self.strings['name']
@@ -52,7 +50,7 @@ class AllsaverbotMod(loader.Module):
         try:
             text = utils.get_args_raw(message)
             reply = await message.get_reply_message()
-            bot_chat = "@allsaverbot"
+            bot_chat = "@TIKTOKDOWNLOADROBOT"
             if not text and not reply:
                 if message.out:
                     await message.edit(self.strings('NoArgs'))
@@ -67,7 +65,7 @@ class AllsaverbotMod(loader.Module):
                 async with message.client.conversation(bot_chat) as conv:
                     try:
                         await message.client.send_message(bot_chat, text)
-                        response = await conv.wait_event(events.NewMessage(incoming=True, from_users=804576054))
+                        response = await conv.wait_event(events.NewMessage(incoming=True, from_users=1598492699))
                     except YouBlockedUserError:
                         await message.reply(self.strings('BlockedBotError'))
                         return
@@ -84,7 +82,7 @@ class AllsaverbotMod(loader.Module):
                 async with message.client.conversation(bot_chat) as conv:
                     try:
                         await message.client.send_message(bot_chat, reply)
-                        response = await conv.wait_event(events.NewMessage(incoming=True, from_users=804576054))
+                        response = await conv.wait_event(events.NewMessage(incoming=True, from_users=1598492699))
                     except YouBlockedUserError:
                         if message.out:
                             await message.reply(self.strings('BlockedBotError'))
@@ -103,17 +101,17 @@ class AllsaverbotMod(loader.Module):
                 return await answer.edit(self.strings('TimeoutError'))
 
     async def watcher(self, message):
-        chat = str(utils.get_chat_id(message))
-        text = message.message
+        chat = str(message.chat_id)
+        text = message.raw_text
         if chat in str(self.config['CheckedChats']) and not ' ' in text:
             if 'tiktok.com/' in text or 'instagram.com/' in text or 'pin.it/' in text:
                 try:
                     answer = await message.client.send_message(message.chat_id, message=self.strings('Working_checker'), reply_to=message)
-                    bot_chat = "@allsaverbot"
+                    bot_chat = "@TIKTOKDOWNLOADROBOT"
                     async with message.client.conversation(bot_chat) as conv:
                         try:
                             await message.client.send_message(bot_chat, message=text.split('=')[0])
-                            response = await conv.wait_event(events.NewMessage(incoming=True, from_users=804576054))
+                            response = await conv.wait_event(events.NewMessage(incoming=True, from_users=1598492699))
                         except YouBlockedUserError:
                             await answer.edit(self.strings('BlockedBotError'))
                             return
