@@ -17,7 +17,7 @@ def register(cb):
 class DownloaderTiktokBotMod(loader.Module):
     """Скачиваю видео TikTok через @downloader_tiktok_bot"""
     strings = {"cfg_doc": "Настройка надписей состояния работы",
-               "name": "DownloaderTiktokBotMod",
+               "name": "DownloaderTiktokBot",
                "NoArgs": "<b>🐈‍⬛: «Миу? Что ты хочешь сделать? Я жду ссылку..»</b>",
                "Working": "<b>Котики(🐈‍⬛ и 🐈) сохраняют твою штучку...🐾</b>",
                "Working_checker": "<b>Ой, котик увидел от тебя ссылку!!!🐾</b>",
