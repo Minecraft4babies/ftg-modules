@@ -11,18 +11,18 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from .. import loader, utils
 
 def register(cb):
-    cb(TiktokDownloadRobotMod())
+    cb(DownloaderTiktokBotMod())
 
 @loader.tds
-class TiktokDownloadRobotMod(loader.Module):
-    """Скачиваю видео TikTok через @TIKTOKDOWNLOADROBOT"""
+class DownloaderTiktokBotMod(loader.Module):
+    """Скачиваю видео TikTok через @downloader_tiktok_bot"""
     strings = {"cfg_doc": "Настройка надписей состояния работы",
                "name": "TiktokDownloadRobot",
                "NoArgs": "<b>🐈‍⬛: «Миу? Что ты хочешь сделать? Я жду ссылку..»</b>",
                "Working": "<b>Котики(🐈‍⬛ и 🐈) сохраняют твою штучку...🐾</b>",
                "Working_checker": "<b>Ой, котик увидел от тебя ссылку!!!🐾</b>",
                "BlockedBotError": "<b>🐈: «Няф, разблокируй, пожалуйста, @allsaverbot!»</b>",
-               "TimeoutError": "<b>🐈‍⬛: «Бот @TIKTOKDOWNLOADROBOT что-то вредничает...🐾»</b>"}
+               "TimeoutError": "<b>🐈‍⬛: «Бот @downloader_tiktok_bot что-то вредничает...🐾»</b>"}
 
     def __init__(self):
         self.name = self.strings['name']
@@ -50,7 +50,7 @@ class TiktokDownloadRobotMod(loader.Module):
         try:
             text = utils.get_args_raw(message)
             reply = await message.get_reply_message()
-            bot_chat = "@TIKTOKDOWNLOADROBOT"
+            bot_chat = "@downloader_tiktok_bot"
             if not text and not reply:
                 if message.out:
                     await message.edit(self.strings('NoArgs'))
@@ -65,7 +65,7 @@ class TiktokDownloadRobotMod(loader.Module):
                 async with message.client.conversation(bot_chat) as conv:
                     try:
                         await message.client.send_message(bot_chat, text)
-                        response = await conv.wait_event(events.NewMessage(incoming=True, from_users=1598492699))
+                        response = await conv.wait_event(events.NewMessage(incoming=True, from_users=1332941342))
                     except YouBlockedUserError:
                         await message.reply(self.strings('BlockedBotError'))
                         return
@@ -82,7 +82,7 @@ class TiktokDownloadRobotMod(loader.Module):
                 async with message.client.conversation(bot_chat) as conv:
                     try:
                         await message.client.send_message(bot_chat, reply)
-                        response = await conv.wait_event(events.NewMessage(incoming=True, from_users=1598492699))
+                        response = await conv.wait_event(events.NewMessage(incoming=True, from_users=1332941342))
                     except YouBlockedUserError:
                         if message.out:
                             await message.reply(self.strings('BlockedBotError'))
@@ -104,14 +104,14 @@ class TiktokDownloadRobotMod(loader.Module):
         chat = str(message.chat_id)
         text = message.raw_text
         if chat in str(self.config['CheckedChats']) and not ' ' in text:
-            if 'tiktok.com/' in text or 'instagram.com/' in text or 'pin.it/' in text:
+            if 'tiktok.com/' in text:
                 try:
                     answer = await message.client.send_message(message.chat_id, message=self.strings('Working_checker'), reply_to=message)
-                    bot_chat = "@TIKTOKDOWNLOADROBOT"
+                    bot_chat = "@downloader_tiktok_bot"
                     async with message.client.conversation(bot_chat) as conv:
                         try:
                             await message.client.send_message(bot_chat, message=text.split('=')[0])
-                            response = await conv.wait_event(events.NewMessage(incoming=True, from_users=1598492699))
+                            response = await conv.wait_event(events.NewMessage(incoming=True, from_users=1332941342))
                         except YouBlockedUserError:
                             await answer.edit(self.strings('BlockedBotError'))
                             return
