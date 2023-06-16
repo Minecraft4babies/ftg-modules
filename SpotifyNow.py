@@ -127,24 +127,24 @@ class SpotifyMod(loader.Module):
     """Display beautiful spotify now bar. Author: @fuccsoc. Rework: @hikariatama"""
     strings = {
         "name": "SpotifyNow",
-        "need_auth": "🚫 <b>Execute </b><code>.sauth</code><b> before using this action.</b>",
-        "on-repeat": "🔂 <b>Set on-repeat.</b>",
-        "off-repeat": "🔁 <b>Stopped track repeat.</b>",
-        "skipped": "⏭ <b>Skipped track.</b>",
-        "err": "🚫 <b>Error occurred. Make sure the track is playing!</b>\n<code>{}</code>",
-        "already_authed": "🚫 <b>You are already authentificated</b>",
-        "authed": "🎧 <b>Auth successful</b>",
-        "playing": "🎧 <b>Playing...</b>",
-        "back": "🔙 <b>Switched to previous track</b>",
-        "paused": "⏸ <b>Pause</b>",
-        "deauth": "🚪 <b>Unauthentificated</b>",
-        "restarted": "🔙 <b>Playing track from the beginning</b>",
-        "auth": "🔐 <a href=\"{}\">Proceed here</a>, approve request, then <code>.scode https://...</code> with redirected url",
-        "liked": "❤️ <b>Liked current playback</b>",
+        "need_auth": "🚫 <b>Виконай </b><code>.sauth</code><b> перед використанням цієї дії.</b>",
+        "on-repeat": "🔂 <b>Потсавлено на повтор.</b>",
+        "off-repeat": "🔁 <b>Повтор зупинено.</b>",
+        "skipped": "⏭ <b>Трек пропущено.</b>",
+        "err": "🚫 <b>Виникла помилка. Переконайся, що трек грає!</b>\n<code>{}</code>",
+        "already_authed": "🚫 <b>Ти вже авторизувався.</b>",
+        "authed": "🎧 <b>Авторизація успішна.</b>",
+        "playing": "🎧 <b>Відтворення...</b>",
+        "back": "🔙 <b>Переключено на минулий трек.</b>",
+        "paused": "⏸ <b>Павза.</b>",
+        "deauth": "🚪 <b>Розавторизування.</b>",
+        "restarted": "🔙 <b>Відтворення треку з початку.</b>",
+        "auth": "🔐 <a href=\"{}\">Перейди сюди</a>, підтвердь запит, а потім <code>.scode https://...</code> з наданим посиланням.",
+        "liked": "❤️ <b>Додано в улюблені.</b>",
         "autobio": "🎧 <b>Spotify autobio {}</b>",
-        "404": "🚫 <b>No results</b>",
-        "playing_track": "🎹 <b>{} added to queue</b>",
-        "no_music": "🚫 <b>No music is playing!</b>",
+        "404": "🚫 <b>Не дало результату...</b>",
+        "playing_track": "🎹 <b>{} додано в чергу.</b>",
+        "no_music": "🚫 <b>Активного треку нема!</b>",
         "no_music_bio": ""
     }
 
@@ -156,7 +156,7 @@ class SpotifyMod(loader.Module):
                                                    redirect_uri='https://fuccsoc.com/', scope=self.scope)
         self.name = self.strings['name']
         self.config = loader.ModuleConfig(
-            "AutoBioTemplate", "Сейчас я слушаю в Spotify: 🎶{}🎶", lambda: "Template for Spotify AutoBio")
+            "AutoBioTemplate", "Зараз слухаю в Spotify: 🎶{}🎶", lambda: "Template for Spotify AutoBio")
         self.bio_task = None
 
     async def autobio(self) -> None:
@@ -199,7 +199,7 @@ class SpotifyMod(loader.Module):
                         about=bio[:70]
                     ))
             except telethon.errors.rpcerrorlist.FloodWaitError as e:
-                logger.info(f'Ожидание {max(e.seconds, 60)} из-за floodwait')
+                logger.info(f'Очікування {max(e.seconds, 60)} из-за floodwait')
                 await asyncio.sleep(max(e.seconds, 60))
                 continue
 
@@ -354,7 +354,7 @@ class SpotifyMod(loader.Module):
     @tokenized
     @autodelete
     async def sfindcmd(self, message: Message) -> None:
-        """Find info about track"""
+        """Знайти інформацію про трек"""
         args = utils.get_args_raw(message)
         if not args:
             await utils.answere(message, self.strings('404'))
@@ -438,7 +438,7 @@ class SpotifyMod(loader.Module):
 
     @error_handler
     async def sauthcmd(self, message: Message) -> None:
-        """First stage of auth"""
+        """Перший ступінь авторизації"""
         if self.db.get(self.name, 'acs_tkn', False):
             await utils.answer(message, self.strings('already_authed'))
         else:
@@ -448,7 +448,7 @@ class SpotifyMod(loader.Module):
     @error_handler
     @autodelete
     async def scodecmd(self, message: Message) -> None:
-        """Second stage of auth"""
+        """Другий ступінь авторизації"""
         url = message.message.split(' ')[1]
         code = self.sp_auth.parse_auth_response_url(url)
         self.db.set(self.name, 'acs_tkn',
@@ -460,7 +460,7 @@ class SpotifyMod(loader.Module):
     @error_handler
     @autodelete
     async def unauthcmd(self, message: Message) -> None:
-        """Deauth from Spotify API"""
+        """Розавторизуватися з Spotify API"""
         self.db.set(self.name, 'acs_tkn', None)
         del self.sp
         await utils.answer(message, self.strings('deauth'))
@@ -469,7 +469,7 @@ class SpotifyMod(loader.Module):
     @tokenized
     @autodelete
     async def sbiocmd(self, message: Message) -> None:
-        """Toggle bio playback streaming"""
+        """Увімкнути/вимкнути авто-біо"""
         current = self.db.get(self.name, 'autobio', False)
         new = not current
         self.db.set(self.name, 'autobio', new)
@@ -483,7 +483,7 @@ class SpotifyMod(loader.Module):
     @tokenized
     @autodelete
     async def stokrefreshcmd(self, message: Message) -> None:
-        """Force refresh token"""
+        """Запустити оновлення токена"""
         self.db.set(self.name, 'acs_tkn', self.sp_auth.refresh_access_token(
             self.db.get(self.name, 'acs_tkn')["refresh_token"]))
         self.db.set(self.name, 'NextRefresh', time.time() + 45 * 60)
@@ -493,7 +493,7 @@ class SpotifyMod(loader.Module):
 
     @error_handler
     async def snowcmd(self, message: Message) -> None:
-        """Show current playback badge"""
+        """Показати поточний бейдж відтворення"""
         current_playback = self.sp.current_playback()
         try:
             device = current_playback["device"]["name"] + \
@@ -545,14 +545,14 @@ class SpotifyMod(loader.Module):
             artists = None
 
         try:
-            result = "🎧 <b>Сейчас я слушаю: </b>"
+            result = "🎧 <b>Зараз я слухаю: </b>"
             result += (
                 f"<code>{track} - {' '.join(artists)}</code>" if artists else f"<code>{track}</code>") if track else ""
             icon = "🖥" if "computer" in str(device) else "📱"
             result += f"\n{icon} <code>{device}</code>" if device else ""
-            result += f"\n🔗 <b>Links</b>: <a href=\"{track_url}\">Spotify</a> | <a href=\"https://song.link/s/{track_id}\">Other</a>" if track_url and track_id else ""
-            result += f"\n🎑 <b>Playlist</b>: <a href=\"https://open.spotify.com/playlist/{playlist_id}\">{playlist_name}</a>" if playlist_name and playlist_id else ""
-            result += f"\n🫂 <b>Owner</b>: {playlist_owner}" if playlist_owner else ""
+            result += f"\n🔗 <b>Лінки</b>: <a href=\"{track_url}\">Spotify</a> | <a href=\"https://song.link/s/{track_id}\">Other</a>" if track_url and track_id else ""
+            result += f"\n🎑 <b>Плейлист</b>: <a href=\"https://open.spotify.com/playlist/{playlist_id}\">{playlist_name}</a>" if playlist_name and playlist_id else ""
+            result += f"\n🫂 <b>Власник</b>: {playlist_owner}" if playlist_owner else ""
             result += f"\n<code>{create_bar(current_playback)}</code> {create_vol(volume)} 🔊"
 
             try:
